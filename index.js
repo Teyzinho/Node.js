@@ -6,7 +6,6 @@ dotenv.config();
 
 connectToDatabase()
 
-
 //Importa Peson
 // const { Person } = require("./person");
 

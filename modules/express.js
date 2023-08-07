@@ -8,6 +8,26 @@ const app = express();
 // Sinalisa que iremos receber json nas nossas requisições
 app.use(express.json());
 
+// npm i ejs :  Boblioteca que permite que você crie templates HTML que incorporam código JavaScript para exibir dados ou tomar decisões de forma dinâmica no lado do servidor.
+app.set('view engine', 'ejs') //Configurando ejs
+app.set('views', 'src/views') //Configurando diretório 
+
+// middlewares : Middlewares executam funções antes ou depois do processamento principal de uma requisição
+app.use((req, res, next) => {
+    console.log(`Request Type : ${req.method}`)
+    console.log(`Content Type: ${req.headers["content-type"]}`)
+    console.log(`Date: ${new Date()}`)
+
+    next(); // Next é usado para dar continuidade ao resto do código
+})
+
+// Exibir usuário no ejs
+app.get('/views/users', async (req,res) => {
+    const users = await UserModel.find({})
+
+    res.render('index', {users: users});
+})
+
 // Url da resposta
 app.get('/home', (req, res) => {
     res.contentType('application/html')
