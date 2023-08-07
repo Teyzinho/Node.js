@@ -1,3 +1,4 @@
+// Criando um server com as funções nativas do node
 const http = require('http')
 
 const port = 8080;
